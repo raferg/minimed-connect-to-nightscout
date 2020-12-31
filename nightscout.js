@@ -7,7 +7,7 @@ var crypto = require('crypto'),
 var logger = require('./logger');
 
 var upload = module.exports.upload = function(entries, endpoint, secret, callback) {
-  logger.log('POST ' + endpoint + ' ' + JSON.stringify(entries));
+  //logger.log('POST ' + endpoint + ' ' + JSON.stringify(entries));
   request.post(
     endpoint,
     {

@@ -65,9 +65,9 @@ var guessPumpOffset = (function () {
     var serverTimeUTC = data['currentServerTime'];
     var hours = Math.round((pumpTimeAsIfUTC - serverTimeUTC) / (60 * 60 * 1000));
     var offset = (hours >= 0 ? '+' : '-') + (Math.abs(hours) < 10 ? '0' : '') + Math.abs(hours) + '00';
-    if (offset !== lastGuess) {
-      logger.log('Guessed pump timezone ' + offset + ' (pump time: "' + data['sMedicalDeviceTime'] + '"; server time: ' + new Date(data['currentServerTime']) + ')');
-    }
+    // if (offset !== lastGuess) {
+    //   logger.log('Guessed pump timezone ' + offset + ' (pump time: "' + data['sMedicalDeviceTime'] + '"; server time: ' + new Date(data['currentServerTime']) + ')');
+    // }
     lastGuess = offset;
     return offset;
   };
