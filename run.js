@@ -67,6 +67,21 @@ function uploadMaybe(items, endpoint, callback) {
   }
 }
 
+function correctionInterval(lastSGDatetimeString) {
+  var lastSGDatetime = Date.parse(lastSGDatetimeString);
+  var nowDatetime = new Date();
+  var diffMsec = (nowDatetime - lastSGDatetime);
+
+  var fiveMins = 300000;
+  var thirtySecs = 30000;
+  var fifteenSecs = 15000;
+  var interval = config.interval;
+  if (diffMsec > thirtySecs) {
+    interval = fiveMins - diffMsec +  fifteenSecs;
+  }
+  return interval;
+}
+
 (function requestLoop() {
   client.fetch(function(err, data) {
     if (err) {
@@ -85,7 +100,8 @@ function uploadMaybe(items, endpoint, callback) {
 
       uploadMaybe(newSgvs, entriesUrl, function() {
         uploadMaybe(newDeviceStatuses, devicestatusUrl, function() {
-          setTimeout(requestLoop, config.interval);
+          var interval = correctionInterval(data.lastSG.datetime);
+          setTimeout(requestLoop, interval);
         });
       });
     }
