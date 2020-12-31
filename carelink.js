@@ -228,7 +228,7 @@ var Client = exports.Client = function (options) {
                         cookieJar.removeAllCookiesSync();
                     }
 
-                    let timeout = retryDurationOnAttempt(i);
+                    let timeout = options.maxRetryDuration;
                     await sleep(1000 * timeout);
                 }
             }
